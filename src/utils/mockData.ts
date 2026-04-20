@@ -189,6 +189,7 @@ export const getRealtimeMetrics = (timezone: Timezone, currency: Currency, perio
     case '7days': multiplier = 7.5; break;
     case 'month': multiplier = 15; break;
     case 'lastMonth': multiplier = 30; break;
+    case 'cumulative': multiplier = 100; break;
   }
 
   const base = multiplier * tzMultiplier;

@@ -306,6 +306,8 @@ export default function Dashboard() {
         return '较上月';
       case 'lastMonth':
         return null;
+      case 'cumulative':
+        return null;
       default:
         return '较前一日';
     }
@@ -318,6 +320,7 @@ export default function Dashboard() {
       case '7days': return '7日';
       case 'month': return '本月';
       case 'lastMonth': return '上月';
+      case 'cumulative': return '累计';
       default: return '当日';
     }
   };
@@ -418,7 +421,7 @@ export default function Dashboard() {
       d0Roi: number;
     }> = {};
 
-    const multiplier = period === 'today' ? 1 : period === 'yesterday' ? 1.2 : period === '7days' ? 7.5 : period === 'month' ? 15 : 30;
+    const multiplier = period === 'today' ? 1 : period === 'yesterday' ? 1.2 : period === '7days' ? 7.5 : period === 'month' ? 15 : period === 'cumulative' ? 100 : 30;
 
     channelData.forEach(ch => {
       if (ch.type === 'self' || ch.type === 'dist') {
@@ -822,11 +825,12 @@ export default function Dashboard() {
             </div>
             <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
               {[
-                { value: 'today', label: '实时' },
+                { value: 'today', label: '今日' },
                 { value: 'yesterday', label: '昨日' },
                 { value: '7days', label: '7日' },
                 { value: 'month', label: '本月' },
-                { value: 'lastMonth', label: '上月' }
+                { value: 'lastMonth', label: '上月' },
+                { value: 'cumulative', label: '累计' }
               ].map((option) => (
                 <button
                   key={option.value}
@@ -943,11 +947,12 @@ export default function Dashboard() {
               </div>
               <div className="flex items-center bg-slate-100 p-1 rounded-md border border-slate-200">
                 {[
-                  { value: 'today', label: '实时' },
+                  { value: 'today', label: '今日' },
                   { value: 'yesterday', label: '昨日' },
                   { value: '7days', label: '7日' },
                   { value: 'month', label: '本月' },
-                  { value: 'lastMonth', label: '上月' }
+                  { value: 'lastMonth', label: '上月' },
+                  { value: 'cumulative', label: '累计' }
                 ].map((option) => (
                   <button
                     key={option.value}
